@@ -1,110 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Vinoth 💘</title>
+  <meta charset="UTF-8">
+  <title>For Vinoth 💘</title>
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  font-family: 'Comic Sans MS', cursive;
-  text-align: center;
-  color: white;
-  position: relative;
-}
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
+    }
 
-/* Center Card */
-.card {
-  z-index: 10;
-}
+    /* Intro Tap Screen */
+    #introScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+      cursor: pointer;
+    }
 
-h1 {
-  font-size: 2.5em;
-}
+    #introScreen h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    #introScreen p {
+      font-size: 1.5em;
+    }
 
-.glow {
-  text-shadow: 0 0 15px #fff, 0 0 25px #ff1f4d;
-  animation: glowPulse 2s infinite alternate;
-}
+    /* Background Video */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
 
-@keyframes glowPulse {
-  from { text-shadow: 0 0 10px #fff; }
-  to { text-shadow: 0 0 30px #ff1f4d; }
-}
+    .video-bg iframe {
+      width: 100vw;
+      height: 100vh;
+      filter: blur(8px) brightness(0.5);
+    }
 
-p {
-  font-size: 1.3em;
-}
+    /* Center Message */
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 10;
+    }
 
-/* Button */
-button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 30px;
-  background: white;
-  color: #ff4b6e;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+    .content h1 {
+      font-size: 3em;
+    }
 
-button:hover {
-  transform: scale(1.1);
-  background: #ffe6eb;
-}
+    .glow {
+      text-shadow: 0 0 15px #ff4b6e, 0 0 30px #ff1f4d;
+      animation: glowPulse 2s infinite alternate;
+    }
 
-/* Floating Hearts */
-.heart {
-  position: absolute;
-  color: white;
-  font-size: 20px;
-  animation: floatUp 6s linear infinite;
-}
+    @keyframes glowPulse {
+      from { text-shadow: 0 0 15px #ff4b6e; }
+      to { text-shadow: 0 0 35px #ff1f4d; }
+    }
 
-@keyframes floatUp {
-  0% { transform: translateY(100vh); opacity: 0; }
-  10% { opacity: 1; }
-  100% { transform: translateY(-10vh); opacity: 0; }
-}
-</style>
+    .content p {
+      font-size: 1.5em;
+      margin-top: 15px;
+    }
+
+    /* Floating Hearts */
+    .heart {
+      position: absolute;
+      color: #ff4b6e;
+      font-size: 25px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+  </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Happy Valentine’s Day <span class="glow">Vinoth 💘</span></h1>
-  <p>You are my today, tomorrow & forever ❤️</p>
+  <!-- Intro Tap Screen -->
+  <div id="introScreen">
+    <h1>Tap to Enter 💖</h1>
+    <p>Vinoth… This Moment is for You ❤️</p>
+  </div>
 
-  <button onclick="playSong()">Play Our Song 💖</button>
-</div>
+  <!-- Background YouTube Video -->
+  <div class="video-bg">
+    <iframe id="ytPlayer"
+      src=""
+      frameborder="0"
+      allow="autoplay; fullscreen">
+    </iframe>
+  </div>
 
-<script>
-// Open YouTube song (Mobile Safe)
-function playSong() {
-  window.open("https://youtu.be/X1vLfrhPX8U", "_blank");
-}
+  <!-- Center Love Message -->
+  <div class="content">
+    <h1>Happy Valentine’s Day <span class="glow">Vinoth 💘</span></h1>
+    <p>You are my today, tomorrow & forever ❤️</p>
+  </div>
 
-// Floating hearts animation
-setInterval(function() {
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
+  <script>
+    const videoID = "X1vLfrhPX8U"; // 💖 Your YouTube video ID
 
-  setTimeout(function() {
-    heart.remove();
-  }, 6000);
-}, 300);
-</script>
+    document.getElementById("introScreen").addEventListener("click", function() {
+      // Set YouTube embed with autoplay & sound ON
+      document.getElementById("ytPlayer").src =
+        "https://www.youtube.com/embed/" + videoID +
+        "?autoplay=1&mute=0&controls=0&loop=1&playlist=" + videoID;
+
+      this.style.display = "none"; // hide tap screen
+    });
+
+    // Hearts Float
+    setInterval(function() {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+
+      setTimeout(function() {
+        heart.remove();
+      }, 6000);
+    }, 300);
+  </script>
 
 </body>
 </html>
